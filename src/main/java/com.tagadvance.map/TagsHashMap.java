@@ -49,14 +49,7 @@ class TagsHashMap<K, V> implements Map<K, V> {
 
     @Override
     public V put(K key, V value) {
-        V previousValue = null;
-
-        var i = this.getIndexOfKey(key);
-        if (i.isPresent()) {
-            previousValue = this.keyValuePairs.get(i.getAsInt()).getValue();
-
-            this.keyValuePairs.remove(i);
-        }
+        V previousValue = this.remove(key);
 
         this.keyValuePairs.add(new KeyValuePair(key, value));
 
@@ -64,8 +57,18 @@ class TagsHashMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public V remove(Object o) {
-        return null;
+    public V remove(Object key) {
+        V previousValue = null;
+
+        var o = this.getIndexOfKey(key);
+        if (o.isPresent()) {
+            var i = o.getAsInt();
+            previousValue = this.keyValuePairs.get(i).getValue();
+
+            this.keyValuePairs.remove(i);
+        }
+
+        return previousValue;
     }
 
     @Override
