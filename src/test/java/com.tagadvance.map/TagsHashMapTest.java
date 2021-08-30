@@ -47,4 +47,19 @@ class TagsHashMapTest {
         assertEquals(value, map.get(key));
     }
 
+    @Test
+    void remove() {
+        var map = new TagsHashMap<String, String>();
+
+        var key = "foo";
+        var value = "bar";
+
+        assertNull(map.remove(key));
+
+        map.put(key, value);
+
+        assertEquals(value, map.remove(key));
+        assertFalse(map.containsKey(value));
+    }
+
 }
