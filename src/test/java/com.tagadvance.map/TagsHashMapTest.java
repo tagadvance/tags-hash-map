@@ -31,4 +31,20 @@ class TagsHashMapTest {
         assertEquals(value, previousValue);
     }
 
+    @Test
+    void containsValueAndGet() {
+        var map = new TagsHashMap<String, String>();
+
+        var key = "foo";
+        var value = "bar";
+
+        assertFalse(map.containsValue(value));
+        assertNull(map.get(key));
+
+        map.put(key, value);
+
+        assertTrue(map.containsValue(value));
+        assertEquals(value, map.get(key));
+    }
+
 }
