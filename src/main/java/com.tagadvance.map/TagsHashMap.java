@@ -3,6 +3,7 @@ package com.tagadvance.map;
 import com.google.common.base.Preconditions;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 class TagsHashMap<K, V> implements Map<K, V> {
@@ -83,7 +84,7 @@ class TagsHashMap<K, V> implements Map<K, V> {
 
     @Override
     public Set<K> keySet() {
-        return null;
+        return this.keyValuePairs.stream().map(p -> p.getKey()).collect(Collectors.toSet());
     }
 
     @Override
