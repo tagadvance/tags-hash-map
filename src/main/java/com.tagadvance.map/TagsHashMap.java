@@ -84,12 +84,12 @@ class TagsHashMap<K, V> implements Map<K, V> {
 
     @Override
     public Set<K> keySet() {
-        return this.keyValuePairs.stream().map(p -> p.getKey()).collect(Collectors.toSet());
+        return this.keyValuePairs.stream().map(KeyValuePair::getKey).collect(Collectors.toSet());
     }
 
     @Override
     public Collection<V> values() {
-        return this.keyValuePairs.stream().map(p -> p.getValue()).collect(Collectors.toList());
+        return this.keyValuePairs.stream().map(KeyValuePair::getValue).collect(Collectors.toList());
     }
 
     @Override
