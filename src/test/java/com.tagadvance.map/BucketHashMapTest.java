@@ -12,6 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class BucketHashMapTest {
 
     @Test
+    void putNullKeyThrowsNullPointerException() {
+        var map = new BucketHashMap<String, String>();
+        assertThrows(NullPointerException.class, () -> map.put(null, "bar"));
+    }
+
+    @Test
     void containsKeyReturnsTrueAfterPut() {
         var map = new BucketHashMap<String, String>();
 
