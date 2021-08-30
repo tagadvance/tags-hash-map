@@ -94,7 +94,22 @@ class TagsHashMap<K, V> implements Map<K, V> {
 
     @Override
     public Set<Entry<K, V>> entrySet() {
-        return null;
+        return this.keyValuePairs.stream().map(pair -> new Entry<K, V>() {
+            @Override
+            public K getKey() {
+                return pair.getKey();
+            }
+
+            @Override
+            public V getValue() {
+                return pair.getValue();
+            }
+
+            @Override
+            public V setValue(V v) {
+                throw new RuntimeException("this operation is not supported");
+            }
+        }).collect(Collectors.toSet());
     }
 
     private OptionalInt getIndexOfKey(Object key) {
