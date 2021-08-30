@@ -32,12 +32,18 @@ class TagsHashMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public boolean containsValue(Object o) {
-        return false;
+    public boolean containsValue(Object value) {
+        return this.getIndexOfValue(value).isPresent();
     }
 
     @Override
-    public V get(Object o) {
+    public V get(Object key) {
+        var o = this.getIndexOfKey(key);
+        if (o.isPresent()) {
+            var i = o.getAsInt();
+            return this.keyValuePairs.get(i).getValue();
+        }
+
         return null;
     }
 
@@ -95,6 +101,18 @@ class TagsHashMap<K, V> implements Map<K, V> {
                 .filter(i -> {
                     var keyValuePair = this.keyValuePairs.get(i);
                     return hashCode == keyValuePair.getKeyHash() && Objects.equals(key, keyValuePair.getKey());
+                })
+                .findFirst();
+    }
+
+    private OptionalInt getIndexOfValue(Object value) {
+        Preconditions.checkNotNull(value, "value must not be null");
+
+        var hashCode = value.hashCode();
+        return IntStream.range(0, this.keyValuePairs.size())
+                .filter(i -> {
+                    var keyValuePair = this.keyValuePairs.get(i);
+                    return hashCode == keyValuePair.getValueHash() && Objects.equals(value, keyValuePair.getValue());
                 })
                 .findFirst();
     }
