@@ -38,6 +38,18 @@ class SimpleHashMap<K, V> implements Map<K, V> {
         return this.getIndexOfValue(value).isPresent();
     }
 
+    private OptionalInt getIndexOfValue(Object value) {
+        Preconditions.checkNotNull(value, "value must not be null");
+
+        var hashCode = value.hashCode();
+        return IntStream.range(0, this.keyValuePairs.size())
+                .filter(i -> {
+                    var keyValuePair = this.keyValuePairs.get(i);
+                    return hashCode == keyValuePair.getValue().hashCode() && Objects.equals(value, keyValuePair.getValue());
+                })
+                .findFirst();
+    }
+
     @Override
     public V get(Object key) {
         var o = this.getIndexOfKey(key);
@@ -47,6 +59,18 @@ class SimpleHashMap<K, V> implements Map<K, V> {
         }
 
         return null;
+    }
+
+    private OptionalInt getIndexOfKey(Object key) {
+        Preconditions.checkNotNull(key, "key must not be null");
+
+        var hashCode = key.hashCode();
+        return IntStream.range(0, this.keyValuePairs.size())
+                .filter(i -> {
+                    var keyValuePair = this.keyValuePairs.get(i);
+                    return hashCode == keyValuePair.getKey().hashCode() && Objects.equals(key, keyValuePair.getKey());
+                })
+                .findFirst();
     }
 
     @Override
@@ -113,30 +137,6 @@ class SimpleHashMap<K, V> implements Map<K, V> {
                 throw new RuntimeException("this operation is not supported");
             }
         }).collect(Collectors.toSet());
-    }
-
-    private OptionalInt getIndexOfKey(Object key) {
-        Preconditions.checkNotNull(key, "key must not be null");
-
-        var hashCode = key.hashCode();
-        return IntStream.range(0, this.keyValuePairs.size())
-                .filter(i -> {
-                    var keyValuePair = this.keyValuePairs.get(i);
-                    return hashCode == keyValuePair.getKey().hashCode() && Objects.equals(key, keyValuePair.getKey());
-                })
-                .findFirst();
-    }
-
-    private OptionalInt getIndexOfValue(Object value) {
-        Preconditions.checkNotNull(value, "value must not be null");
-
-        var hashCode = value.hashCode();
-        return IntStream.range(0, this.keyValuePairs.size())
-                .filter(i -> {
-                    var keyValuePair = this.keyValuePairs.get(i);
-                    return hashCode == keyValuePair.getValue().hashCode() && Objects.equals(value, keyValuePair.getValue());
-                })
-                .findFirst();
     }
 
     private class KeyValuePair {
