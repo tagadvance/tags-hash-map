@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -104,6 +105,28 @@ class TagsHashMapTest {
         assertEquals("alpha", map.get("a"));
         assertEquals("beta", map.get("b"));
         assertEquals("gamma", map.get("c"));
+    }
+
+    @Test
+    void entrySet() {
+        var map = new TagsHashMap<String, String>();
+        map.put("a", "alpha");
+        map.put("b", "beta");
+        map.put("c", "gamma");
+
+        var entrySet = map.entrySet();
+
+        assertEquals(map.size(), entrySet.size());
+
+        entrySet.forEach(s -> {
+            var key = s.getKey();
+            var value = s.getValue();
+            if (Objects.equals(map.get(key), value)) {
+                map.remove(key);
+            }
+        });
+
+        assertEquals(0, map.size());
     }
 
 }
