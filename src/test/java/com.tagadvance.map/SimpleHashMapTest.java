@@ -18,6 +18,12 @@ class SimpleHashMapTest {
     }
 
     @Test
+    void putNullValueThrowsNullPointerException() {
+        var map = new SimpleHashMap<String, String>();
+        assertThrows(NullPointerException.class, () -> map.put("foo", null));
+    }
+
+    @Test
     void containsKeyReturnsTrueAfterPut() {
         var map = new SimpleHashMap<String, String>();
 

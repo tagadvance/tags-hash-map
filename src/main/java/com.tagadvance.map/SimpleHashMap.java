@@ -51,6 +51,8 @@ class SimpleHashMap<K, V> implements Map<K, V> {
 
     @Override
     public V put(K key, V value) {
+        Preconditions.checkNotNull(value, "value must not be null");
+
         V previousValue = this.remove(key);
 
         this.keyValuePairs.add(new KeyValuePair(key, value));
