@@ -74,7 +74,7 @@ class TagsHashMap<K, V> implements Map<K, V> {
 
     @Override
     public void putAll(Map<? extends K, ? extends V> map) {
-
+        map.entrySet().forEach(e -> this.put(e.getKey(), e.getValue()));
     }
 
     @Override
