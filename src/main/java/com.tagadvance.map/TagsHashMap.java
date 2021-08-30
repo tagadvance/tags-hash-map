@@ -89,7 +89,7 @@ class TagsHashMap<K, V> implements Map<K, V> {
 
     @Override
     public Collection<V> values() {
-        return null;
+        return this.keyValuePairs.stream().map(p -> p.getValue()).collect(Collectors.toList());
     }
 
     @Override
