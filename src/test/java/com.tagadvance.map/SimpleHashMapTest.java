@@ -9,11 +9,11 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TagsHashMapTest {
+class SimpleHashMapTest {
 
     @Test
     void containsKeyReturnsTrueAfterPut() {
-        var map = new TagsHashMap<String, String>();
+        var map = new SimpleHashMap<String, String>();
 
         var key = "foo";
         assertFalse(map.containsKey(key));
@@ -25,7 +25,7 @@ class TagsHashMapTest {
 
     @Test
     void putReturnsPreviousValue() {
-        var map = new TagsHashMap<String, String>();
+        var map = new SimpleHashMap<String, String>();
 
         var key = "foo";
         var value = "bar";
@@ -38,7 +38,7 @@ class TagsHashMapTest {
 
     @Test
     void containsValueAndGet() {
-        var map = new TagsHashMap<String, String>();
+        var map = new SimpleHashMap<String, String>();
 
         var key = "foo";
         var value = "bar";
@@ -54,7 +54,7 @@ class TagsHashMapTest {
 
     @Test
     void remove() {
-        var map = new TagsHashMap<String, String>();
+        var map = new SimpleHashMap<String, String>();
 
         var key = "foo";
         var value = "bar";
@@ -69,7 +69,7 @@ class TagsHashMapTest {
 
     @Test
     void keySet() {
-        var map = new TagsHashMap<String, String>();
+        var map = new SimpleHashMap<String, String>();
 
         map.put("a", "alpha");
         map.put("b", "beta");
@@ -80,7 +80,7 @@ class TagsHashMapTest {
 
     @Test
     void values() {
-        var map = new TagsHashMap<String, String>();
+        var map = new SimpleHashMap<String, String>();
 
         map.put("a", "alpha");
         map.put("b", "beta");
@@ -99,7 +99,7 @@ class TagsHashMapTest {
         map.put("b", "beta");
         map.put("c", "gamma");
 
-        var copy = new TagsHashMap<String, String>();
+        var copy = new SimpleHashMap<String, String>();
         copy.putAll(map);
 
         assertEquals("alpha", copy.get("a"));
@@ -109,7 +109,7 @@ class TagsHashMapTest {
 
     @Test
     void entrySet() {
-        var map = new TagsHashMap<String, String>();
+        var map = new SimpleHashMap<String, String>();
         map.put("a", "alpha");
         map.put("b", "beta");
         map.put("c", "gamma");

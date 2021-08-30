@@ -6,15 +6,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-class TagsHashMap<K, V> implements Map<K, V> {
+class SimpleHashMap<K, V> implements Map<K, V> {
 
     private final List<KeyValuePair> keyValuePairs;
 
-    public TagsHashMap() {
+    public SimpleHashMap() {
         this.keyValuePairs = new ArrayList<>();
     }
 
-    public TagsHashMap(int initialSize) {
+    public SimpleHashMap(int initialSize) {
         this.keyValuePairs = new ArrayList<>(initialSize);
     }
 
