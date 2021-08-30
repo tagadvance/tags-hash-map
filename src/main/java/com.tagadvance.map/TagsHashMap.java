@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 class TagsHashMap<K, V> implements Map<K, V> {
+
     private final List<KeyValuePair> keyValuePairs;
 
     public TagsHashMap() {
@@ -119,7 +120,7 @@ class TagsHashMap<K, V> implements Map<K, V> {
         return IntStream.range(0, this.keyValuePairs.size())
                 .filter(i -> {
                     var keyValuePair = this.keyValuePairs.get(i);
-                    return hashCode == keyValuePair.getKeyHash() && Objects.equals(key, keyValuePair.getKey());
+                    return hashCode == keyValuePair.getKey().hashCode() && Objects.equals(key, keyValuePair.getKey());
                 })
                 .findFirst();
     }
@@ -131,7 +132,7 @@ class TagsHashMap<K, V> implements Map<K, V> {
         return IntStream.range(0, this.keyValuePairs.size())
                 .filter(i -> {
                     var keyValuePair = this.keyValuePairs.get(i);
-                    return hashCode == keyValuePair.getValueHash() && Objects.equals(value, keyValuePair.getValue());
+                    return hashCode == keyValuePair.getValue().hashCode() && Objects.equals(value, keyValuePair.getValue());
                 })
                 .findFirst();
     }
@@ -140,13 +141,10 @@ class TagsHashMap<K, V> implements Map<K, V> {
 
         private final K key;
         private final V value;
-        private final int keyHash, valueHash;
 
         public KeyValuePair(K key, V value) {
             this.key = key;
             this.value = value;
-            this.keyHash = key.hashCode();
-            this.valueHash = value.hashCode();
         }
 
         public K getKey() {
@@ -157,12 +155,6 @@ class TagsHashMap<K, V> implements Map<K, V> {
             return value;
         }
 
-        public int getKeyHash() {
-            return keyHash;
-        }
-
-        public int getValueHash() {
-            return valueHash;
-        }
     }
+
 }
