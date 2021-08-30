@@ -18,12 +18,12 @@ class TagsHashMap<K, V> implements Map<K, V> {
 
     @Override
     public int size() {
-        return 0;
+        return this.keyValuePairs.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return this.keyValuePairs.isEmpty();
     }
 
     @Override
@@ -69,7 +69,7 @@ class TagsHashMap<K, V> implements Map<K, V> {
 
     @Override
     public void clear() {
-
+        this.keyValuePairs.clear();
     }
 
     @Override
