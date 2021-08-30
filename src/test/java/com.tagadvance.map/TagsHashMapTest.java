@@ -102,9 +102,9 @@ class TagsHashMapTest {
         var copy = new TagsHashMap<String, String>();
         copy.putAll(map);
 
-        assertEquals("alpha", map.get("a"));
-        assertEquals("beta", map.get("b"));
-        assertEquals("gamma", map.get("c"));
+        assertEquals("alpha", copy.get("a"));
+        assertEquals("beta", copy.get("b"));
+        assertEquals("gamma", copy.get("c"));
     }
 
     @Test
