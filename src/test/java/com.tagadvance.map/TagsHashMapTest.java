@@ -1,7 +1,10 @@
 package com.tagadvance.map;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -72,6 +75,20 @@ class TagsHashMapTest {
         map.put("c", "gamma");
 
         assertEquals(Sets.newHashSet("a", "b", "c"), map.keySet());
+    }
+
+    @Test
+    void values() {
+        var map = new TagsHashMap<String, String>();
+
+        map.put("a", "alpha");
+        map.put("b", "beta");
+        map.put("c", "gamma");
+
+        assertArrayEquals(
+                Arrays.asList("alpha", "beta", "gamma").toArray(),
+                map.values().toArray()
+        );
     }
 
 }
