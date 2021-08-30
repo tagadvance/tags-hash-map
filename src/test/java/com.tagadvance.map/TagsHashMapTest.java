@@ -1,5 +1,6 @@
 package com.tagadvance.map;
 
+import com.google.common.collect.Sets;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -60,6 +61,17 @@ class TagsHashMapTest {
 
         assertEquals(value, map.remove(key));
         assertFalse(map.containsKey(value));
+    }
+
+    @Test
+    void keySet() {
+        var map = new TagsHashMap<String, String>();
+
+        map.put("a", "alpha");
+        map.put("b", "beta");
+        map.put("c", "gamma");
+
+        assertEquals(Sets.newHashSet("a", "b", "c"), map.keySet());
     }
 
 }
